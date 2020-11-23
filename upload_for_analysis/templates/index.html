@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title>File Upload</title>
+  </head>
+  <body>
+    <h1>File Upload</h1>
+    {{ request.form['delimiter'] }}
+    <form method="POST" action="{{ url_for('uploaded') }}" enctype="multipart/form-data">
+      <p><input type="file" id="file" name="file"></p>
+      <p>Delimiter: <input type="text" maxlength="1" name="delimiter" id="delimiter" value="," size="1"></p>
+      <p>Header on First Line? <input type="checkbox" name="header" id="header" value="header" checked></p>
+      <p>Strings Quoted? <input type="checkbox" name="quoted" id="quoted" value="quoted"></p>
+      <p><input type="submit" value="Submit"></p>
+    </form>
+  </body>
+</html>

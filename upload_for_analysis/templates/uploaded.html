@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>uploaded</title>
+</head>
+<body>
+filename: {{ filename }}
+<table>
+    <tr>
+        <td>column name</td>
+        <td>data type</td>
+    </tr>
+    {% for colname in df.columns %}
+    <tr>
+        <td>{{colname}}</td>
+        <td>
+            <select name="{{colname}}" id="{{colname}}">
+              <option value="string">string</option>
+              <option value="integer">integer</option>
+              <option value="decimal">decimal</option>
+              <option value="date">date</option>
+            </select>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
