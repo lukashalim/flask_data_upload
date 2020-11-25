@@ -26,6 +26,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from . import db
+    db.init_app(app)
+
     # a simple upload page
     @app.route("/", methods=['GET','POST'])
     def index():
@@ -59,7 +62,30 @@ def create_app(test_config=None):
             path_and_file = os.path.join(app.config['upload_folder'], filename)
             file.save(path_and_file)
             df = pd.read_csv(path_and_file, delimiter=delimiter)
-            return render_template('/uploaded.html', df=df,filename=filename)
+            return render_template('/uploaded.html', df=df,filename=filename, delimiter=delimiter)
+
+    from upload_for_analysis.db import get_db
+
+    @app.route("/save_settings", methods=['POST'])
+    def save_settings():
+        path_and_file = os.path.join(app.config['upload_folder'], request.form['filename'])
+        delimiter=request.form['delimiter']
+        print(f"path and file: {path_and_file}")
+        print(f"delimiter : {delimiter}")
+        columns = pd.read_csv(path_and_file).columns
+        db = get_db()
+        cursor = db.cursor()
+        #db.execute(
+        #    'INSERT INTO file (filename, delimiter)'
+        #    ' VALUES (?, ?)',
+        #    (request.form['filename'], delimiter)
+        #)
+        cursor.execute('INSERT INTO file (filename, delimiter) VALUES (?, ?)', (request.form['filename'], delimiter))
+        file_id = cursor.lastrowid
+        for column in columns:
+            cursor.execute('INSERT INTO fieldsettings (file_id, column_name, column_type) VALUES (?, ?, ?)', (cursor.lastrowid,column,request.form[column]))
+        db.commit()
+        return "saved"
 
     return app
 

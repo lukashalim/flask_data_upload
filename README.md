@@ -10,4 +10,5 @@ Once the dataset is loaded the user can choose the type for each column (numeric
 After that, the user selects the columns containing the verbatims and click on an analyze button.
 The data is then pushed to the backend where I’ll have python scripts to do text classification and other Machine learning models that I’ve developed.
 Tip: I would recommend that you simply assume that the analytics part is handled by the client. You can simply use any CSV data you can lay your hands on or create a small file yourself.
-Skills: Bootstrap, Flask, Javascript, Python
+>
+>Skills: Bootstrap, Flask, Javascript, Python

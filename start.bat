@@ -1,3 +1,0 @@
-set FLASK_APP=upload_for_analysis
-set FLASK_ENV=development
-flask run

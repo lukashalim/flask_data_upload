@@ -5,25 +5,30 @@
     <title>uploaded</title>
 </head>
 <body>
-filename: {{ filename }}
-<table>
-    <tr>
-        <td>column name</td>
-        <td>data type</td>
-    </tr>
-    {% for colname in df.columns %}
-    <tr>
-        <td>{{colname}}</td>
-        <td>
-            <select name="{{colname}}" id="{{colname}}">
-              <option value="string">string</option>
-              <option value="integer">integer</option>
-              <option value="decimal">decimal</option>
-              <option value="date">date</option>
-            </select>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+    <form method="POST" action="{{ url_for('save_settings') }}" enctype="multipart/form-data">
+        filename: {{ filename }}
+        <input id="filename" name="filename" type="hidden" value="{{ filename }}">
+        <input id="delimiter" name="delimiter" type="hidden" value="{{ delimiter }}">
+        <table>
+            <tr>
+                <td>column name</td>
+                <td>data type</td>
+            </tr>
+            {% for colname in df.columns %}
+            <tr>
+                <td>{{colname}}</td>
+                <td>
+                    <select name="{{colname}}" id="{{colname}}">
+                      <option value="string">string</option>
+                      <option value="integer">integer</option>
+                      <option value="decimal">decimal</option>
+                      <option value="date">date</option>
+                    </select>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p><input type="submit" value="Submit"></p>
+    </form>
 </body>
 </html>
