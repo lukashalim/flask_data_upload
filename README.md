@@ -12,3 +12,5 @@ The data is then pushed to the backend where I’ll have python scripts to do te
 Tip: I would recommend that you simply assume that the analytics part is handled by the client. You can simply use any CSV data you can lay your hands on or create a small file yourself.
 >
 >Skills: Bootstrap, Flask, Javascript, Python
+
+Since I hadn't done any web development recently, I took a minimal approach here, using no javascript or css and a sqlite database.
